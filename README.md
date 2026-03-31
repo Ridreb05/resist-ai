@@ -150,96 +150,6 @@ Treatment Recommendation Engine
 | Database | PostgreSQL 16 |
 
 ---
-
-## 🚀 Quick Start
-
-### Prerequisites
-- **Docker** 24+ and **Docker Compose** v2
-- OR: Python 3.11+ and Node.js 20+
-
-### Option A — Docker (Recommended)
-
-```bash
-# 1. Clone
-git clone https://github.com/your-org/resistai.git
-cd resistai
-
-# 2. Configure secrets
-echo "SECRET_KEY=$(openssl rand -hex 32)" > .env
-
-# 3. Build & run
-docker compose up --build
-
-# App is live at http://localhost
-# API docs at http://localhost:8000/api/docs
-```
-
-### Option B — Local Development
-
-**Backend:**
-```bash
-cd backend
-
-# Create virtualenv
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-
-# Install deps
-pip install -r requirements.txt
-
-# Configure environment
-cp .env.example .env
-# Edit .env as needed
-
-# Run dev server
-uvicorn src.main:app --reload --port 8000
-```
-
-**Frontend:**
-```bash
-cd frontend
-
-# Install deps
-npm install --legacy-peer-deps
-
-# Configure
-cp .env.example .env.local
-
-# Run dev server
-npm run dev
-# → http://localhost:5173
-```
-
----
-
-## 🐳 Docker Deployment
-
-```bash
-# Production build
-docker compose -f docker-compose.yml up --build -d
-
-# View logs
-docker compose logs -f backend
-
-# Run backend tests inside container
-docker compose exec backend pytest tests/ -v
-
-# Stop everything
-docker compose down
-```
-
-### Environment Variables
-
-| Variable | Default | Description |
-|---|---|---|
-| `SECRET_KEY` | *(required)* | JWT signing key — use `openssl rand -hex 32` |
-| `DATABASE_URL` | SQLite | PostgreSQL in production |
-| `REDIS_URL` | `redis://redis:6379/0` | Redis connection |
-| `ALLOWED_ORIGINS` | localhost | CORS origins |
-| `MODEL_DIR` | `./ml_models` | ML model storage path |
-
----
-
 ## 📡 API Documentation
 
 Interactive docs available at **`/api/docs`** (Swagger UI) and **`/api/redoc`**.
@@ -382,9 +292,6 @@ resistai/
 │   ├── nginx.conf
 │   └── package.json
 │
-├── .github/
-│   └── workflows/
-│       └── main.yml       # CI/CD: test → build → push
 │
 ├── docker-compose.yml
 ├── .gitignore

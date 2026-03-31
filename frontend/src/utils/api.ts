@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 // File: frontend/src/utils/api.ts
 import axios from 'axios'
 import { useAuthStore } from '../store'

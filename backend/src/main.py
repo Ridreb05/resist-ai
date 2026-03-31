@@ -63,13 +63,25 @@ def create_app() -> FastAPI:
     )
 
     # ── Middleware ───────────────────────────────────────────────────────────
+    origins = [
+        "https://resist-ai-1.onrender.com",  # Production React Frontend
+        "http://localhost:5173",             # Local Vite React dev server
+        "http://localhost:3000",             # Alternative local dev port
+    ]
+
+    if isinstance(settings.ALLOWED_ORIGINS, list):
+        origins.extend(settings.ALLOWED_ORIGINS)
+    elif isinstance(settings.ALLOWED_ORIGINS, str):
+        origins.append(settings.ALLOWED_ORIGINS)
+
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=settings.ALLOWED_ORIGINS,
+        allow_origins=origins,  
         allow_credentials=True,
-        allow_methods=["*"],
+        allow_methods=["*"],    
         allow_headers=["*"],
     )
+    
     app.add_middleware(GZipMiddleware, minimum_size=1000)
 
     # ── Rate Limiting ────────────────────────────────────────────────────────

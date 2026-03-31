@@ -150,7 +150,7 @@ Treatment Recommendation Engine
 
 ---
 
-## 🤖 ML Model Details
+## ML Model Details
 
 ### Architecture
 **Soft-voting ensemble** with weighted combination:
@@ -206,7 +206,7 @@ df["resistance_outcome"] = df["outcome"].map({"R": 2, "I": 1, "S": 0})
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 resistai/

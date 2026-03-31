@@ -5,7 +5,7 @@
 > AI-driven prediction of antimicrobial resistance patterns from bacterial genetic and phenotypic data,
 > with evidence-based treatment support and interactive gene network visualization.
 
-[![CI/CD](https://github.com/your-org/resistai/actions/workflows/main.yml/badge.svg)](https://github.com/your-org/resistai/actions)
+[![CI/CD](https://github.com/Ridreb05/resist-ai/actions/workflows/main.yml/badge.svg)](https://github.com/Ridreb05/resist-ai/actions)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?logo=fastapi&logoColor=white)
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)

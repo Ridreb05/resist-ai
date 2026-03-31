@@ -1,4 +1,4 @@
-# 🧬 ResistAI — Antibiotic Resistance Intelligence Platform
+#  ResistAI — Antibiotic Resistance Intelligence Platform
 
 > **Codecure 2026 · SPIRIT · IIT (BHU) Varanasi**
 >
@@ -12,7 +12,7 @@
 
 ---
 
-## 📖 Table of Contents
+## Table of Contents
 
 1. [Problem Statement](#problem-statement)
 2. [Solution Overview](#solution-overview)
@@ -30,7 +30,7 @@
 
 ---
 
-## 🎯 Problem Statement
+## Problem Statement
 
 Antimicrobial resistance (AMR) is one of the most pressing global health challenges.
 **ResistAI** addresses this by:
@@ -42,7 +42,7 @@ Antimicrobial resistance (AMR) is one of the most pressing global health challen
 
 ---
 
-## 💡 Solution Overview
+## Solution Overview
 
 ```
 Bacterial Isolate Data (MIC values + Gene markers)
@@ -58,24 +58,24 @@ Treatment Recommendation Engine
 
 ---
 
-## ✨ Features
+## Features
 
 | Feature | Description |
 |---|---|
-| 🔬 **Single Prediction** | Predict resistance for one isolate with confidence scores |
-| 📦 **Batch Prediction** | Process up to 100 isolates in one API call |
-| 🧠 **SHAP Explainability** | Top-10 feature importances per prediction |
-| 💊 **Treatment Support** | Evidence-based alternative antibiotic suggestions |
-| 🕸 **Gene Network** | Interactive D3 force-directed co-occurrence graph |
-| 📊 **Analytics Dashboard** | Resistance rates, pie charts, radar charts, data tables |
-| 🔐 **JWT Auth** | Secure registration / login with persistent history |
-| 📡 **REST API** | Fully documented OpenAPI/Swagger interface |
-| 🐳 **Docker Ready** | One-command deployment |
-| ⚙️ **CI/CD** | GitHub Actions for test → build → push pipeline |
+| **Single Prediction** | Predict resistance for one isolate with confidence scores |
+| **Batch Prediction** | Process up to 100 isolates in one API call |
+| **SHAP Explainability** | Top-10 feature importances per prediction |
+| **Treatment Support** | Evidence-based alternative antibiotic suggestions |
+| **Gene Network** | Interactive D3 force-directed co-occurrence graph |
+| **Analytics Dashboard** | Resistance rates, pie charts, radar charts, data tables |
+| **JWT Auth** | Secure registration / login with persistent history |
+| **REST API** | Fully documented OpenAPI/Swagger interface |
+| **Docker Ready** | One-command deployment |
+| **CI/CD** | GitHub Actions for test → build → push pipeline |
 
 ---
 
-## 🏗 Architecture
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -113,7 +113,7 @@ Treatment Recommendation Engine
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### Backend
 | Layer | Technology |
@@ -147,64 +147,6 @@ Treatment Recommendation Engine
 | Web Server | Nginx |
 | CI/CD | GitHub Actions |
 | Database | PostgreSQL 16 |
-
----
-## 📡 API Documentation
-
-Interactive docs available at **`/api/docs`** (Swagger UI) and **`/api/redoc`**.
-
-### Key Endpoints
-
-#### POST `/api/v1/predict/single`
-Predict resistance for one isolate.
-```json
-{
-  "bacterial_species": "E. coli",
-  "antibiotic": "Ciprofloxacin",
-  "features": {
-    "MIC_Ciprofloxacin": 8.0,
-    "MIC_Amoxicillin": 16.0,
-    "gene_blaTEM": 1,
-    "gene_qnrS": 1
-  }
-}
-```
-**Response:**
-```json
-{
-  "prediction_id": "uuid",
-  "prediction": "Resistant",
-  "confidence": 0.912,
-  "probability_resistant": 0.912,
-  "probability_susceptible": 0.054,
-  "probability_intermediate": 0.034,
-  "feature_importance": [
-    { "feature": "MIC_Ciprofloxacin", "shap_value": 0.421, "direction": "positive" }
-  ],
-  "treatment_suggestions": [
-    { "antibiotic": "Meropenem", "recommendation": "First-line", "confidence": 0.92,
-      "rationale": "Carbapenem for fluoroquinolone-resistant strains" }
-  ]
-}
-```
-
-#### POST `/api/v1/predict/batch`
-Batch predict up to 100 isolates.
-
-#### GET `/api/v1/genes/network`
-Resistance gene co-occurrence network (nodes + edges + stats).
-
-#### GET `/api/v1/analysis/resistance-stats`
-Resistance rates per antibiotic from the dataset.
-
-#### GET `/api/v1/predict/model-info`
-Model type, metrics, and feature count.
-
-#### POST `/api/v1/auth/register`
-Register and receive JWT token.
-
-#### POST `/api/v1/auth/login`
-Login and receive JWT token.
 
 ---
 

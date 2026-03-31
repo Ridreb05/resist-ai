@@ -1,5 +1,5 @@
 // File: frontend/src/components/ui.tsx
-import { ReactNode, CSSProperties, forwardRef } from 'react'
+import { ReactNode, CSSProperties, forwardRef, ChangeEvent, FocusEvent } from 'react'
 
 export function Card({ children, style, className, onClick }: {
   children: ReactNode; style?: CSSProperties; className?: string; onClick?: () => void
@@ -74,27 +74,49 @@ export function Button({children,onClick,variant='primary',disabled=false,loadin
 
 export const Input = forwardRef<HTMLInputElement,{
   label?:string;name?:string;type?:string;placeholder?:string;
-  value?:string|number;onChange?:(e:React.ChangeEvent<HTMLInputElement>)=>void;
+  value?:string|number;onChange?:(e:ChangeEvent<HTMLInputElement>)=>void;
   error?:string;required?:boolean;hint?:string;autoComplete?:string;
 }>(({label,name,type='text',placeholder,value,onChange,error,required,hint,autoComplete},ref)=>{
+  
+  const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
+    e.target.style.borderColor = error ? 'var(--resistant)' : 'var(--border-focus)';
+    e.target.style.boxShadow = error ? '0 0 0 3px var(--resistant-dim)' : '0 0 0 3px var(--accent-dim)';
+  };
+
+  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+    e.target.style.borderColor = error ? 'var(--resistant-border)' : 'var(--border-strong)';
+    e.target.style.boxShadow = 'none';
+  };
+
   return (
     <div style={{display:'flex',flexDirection:'column',gap:5}}>
-      {label&&<label style={{fontSize:12,fontWeight:500,color:'var(--text-secondary)',display:'flex',alignItems:'center',gap:4}}>
-        {label}{required&&<span style={{color:'var(--resistant)',fontSize:11}}>*</span>}
-      </label>}
-      <input ref={ref} name={name} type={type} placeholder={placeholder} value={value}
-        onChange={onChange} required={required} autoComplete={autoComplete} style={{
+      {label && (
+        <label style={{fontSize:12,fontWeight:500,color:'var(--text-secondary)',display:'flex',alignItems:'center',gap:4}}>
+          {label}{required && <span style={{color:'var(--resistant)',fontSize:11}}>*</span>}
+        </label>
+      )}
+      
+      <input 
+        ref={ref} 
+        name={name} 
+        type={type} 
+        placeholder={placeholder} 
+        value={value}
+        onChange={onChange} 
+        required={required} 
+        autoComplete={autoComplete} 
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        style={{
           background:'var(--bg-elevated)',
-          border:\`1px solid \${error?'var(--resistant-border)':'var(--border-strong)'}\`,
+          border:`1px solid ${error?'var(--resistant-border)':'var(--border-strong)'}`,
           borderRadius:'var(--r-md)',padding:'7px 11px',color:'var(--text-primary)',
           fontSize:14,fontFamily:'var(--font-sans)',outline:'none',
           transition:'border-color var(--t-fast),box-shadow var(--t-fast)',width:'100%',height:34,
         }}
-        onFocus={e=>{e.target.style.borderColor=error?'var(--resistant)':'var(--border-focus)';e.target.style.boxShadow=error?'0 0 0 3px var(--resistant-dim)':'0 0 0 3px var(--accent-dim)'}}
-        onBlur={e=>{e.target.style.borderColor=error?'var(--resistant-border)':'var(--border-strong)';e.target.style.boxShadow='none'}}
       />
-      {hint&&!error&&<span style={{fontSize:11,color:'var(--text-muted)'}}>{hint}</span>}
-      {error&&<span style={{fontSize:11,color:'var(--resistant)'}}>⚠ {error}</span>}
+      {hint && !error && <span style={{fontSize:11,color:'var(--text-muted)'}}>{hint}</span>}
+      {error && <span style={{fontSize:11,color:'var(--resistant)'}}>⚠ {error}</span>}
     </div>
   )
 })
